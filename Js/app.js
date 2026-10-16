@@ -12,10 +12,14 @@ const DATA = {
     cgpa: "8.86",
     about:
         "I'm a Computer Science (Data Science) student who likes turning ideas into working programs. I started with C and C++, moved on to data structures and algorithms, and now build for the web with HTML, CSS, JavaScript and React. Away from the screen, I draw.",
-    github: "https://github.com/pushpendu-bit", 
-    linkedin: "linkedin.com/in/pushpendu-ghosh-b21a3636b",                
-    email: "ghoshn@gmail.com"                    
+    github: "https://github.com/", // add your profile link
+    linkedin: "https://www.linkedin.com/in/Pushpendu-ghosh83",
+    email: "ghoshn2026@gmail.com"
 };
+
+/* Link helpers: add https:// if missing, and open Gmail compose for the email button */
+const fixUrl = (u) => (u ? (/^(https?:\/\/|mailto:)/i.test(u.trim()) ? u.trim() : "https://" + u.trim().replace(/^\/+/, "")) : "");
+const mailHref = (e) => (e ? "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(e.trim()) : "");
 
 const REACT_ICON = h("svg", { viewBox: "-12 -12 24 24", "aria-hidden": true },
     h("g", { fill: "none", stroke: "#fff", strokeWidth: 1.2 },
@@ -39,7 +43,7 @@ const SKILLS = [
 const TIMELINE = [
     ["B.Tech, CSE (Data Science)", DATA.college, "Completed first year with an overall CGPA of " + DATA.cgpa + "."],
     ["Hackathon", "First year", "Took part in a hackathon at college."],
-    ["Higher Secondary (12th), Science", "Bandipur High School", "Scored 86%."],
+    ["Higher Secondary (12th), Science", "Bandipur High School", "Scored 88%."],
     ["Secondary (10th)", "Bandipur High School", "Scored 76%."]
 ];
 
@@ -49,7 +53,7 @@ const SECTIONS = [["home", "Home"], ["about", "About"], ["skills", "Skills"], ["
 function Nav({ active }) {
     const GH = h("svg", { viewBox: "0 0 24 24", "aria-hidden": true }, h("path", { d: "M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2z" }));
     const MAIL = h("svg", { viewBox: "0 0 24 24", "aria-hidden": true }, h("path", { d: "M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.5 2.2V17h15V7.2l-7.5 5.3-7.500-5.300z" }));
-    const soc = [["GitHub", DATA.github, GH], ["LinkedIn", DATA.linkedin, "in"], ["Email", DATA.email && "mailto:" + DATA.email, MAIL]].filter((x) => x[1]);
+    const soc = [["GitHub", fixUrl(DATA.github), GH], ["LinkedIn", fixUrl(DATA.linkedin), "in"], ["Email", mailHref(DATA.email), MAIL]].filter((x) => x[1]);
     return h("header", { className: "bar" }, h("div", { className: "wrap" },
         h("nav", { className: "links", "aria-label": "Sections" },
             SECTIONS.map(([id, label]) => h("a", { key: id, href: "#" + id, className: active === id ? "on" : "" }, label))),
@@ -80,7 +84,7 @@ function About() {
             h("div", { className: "card" }, h("p", null, DATA.about)),
             h("div", { className: "stats" },
                 h("div", { className: "card stat" }, h("b", null, DATA.cgpa), h("span", null, "CGPA after first year")),
-                h("div", { className: "card stat" }, h("b", null, "86%"), h("span", null, "12th grade, Science"))))));
+                h("div", { className: "card stat" }, h("b", null, "88%"), h("span", null, "12th grade, Science"))))));
 }
 
 function SkillCard({ s }) {
@@ -119,7 +123,7 @@ function Education() {
 }
 
 function Contact() {
-    const links = [["GitHub", DATA.github], ["LinkedIn", DATA.linkedin], ["Email", DATA.email && "mailto:" + DATA.email]].filter((l) => l[1]);
+    const links = [["GitHub", fixUrl(DATA.github)], ["LinkedIn", fixUrl(DATA.linkedin)], ["Email", mailHref(DATA.email)]].filter((l) => l[1]);
     return h("section", { id: "contact", className: "section" }, h("div", { className: "wrap" },
         h("div", { className: "card contact" },
             h(Heading, { small: "Get in touch" }, "Let's work together"),
@@ -136,7 +140,7 @@ function App() {
             { rootMargin: "-45% 0px -50% 0px" });
         document.querySelectorAll("section").forEach((s) => io.observe(s));
         return () => io.disconnect();
-    }, []);
+    }, [])
     return h(React.Fragment, null,
         h(Nav, { active }),
         h("main", null, h(Hero), h(About), h(Skills), h(Projects), h(Education), h(Contact)),
