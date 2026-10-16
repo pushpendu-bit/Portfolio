@@ -12,7 +12,7 @@ const DATA = {
     cgpa: "8.86",
     about:
         "I'm a Computer Science (Data Science) student who likes turning ideas into working programs. I started with C and C++, moved on to data structures and algorithms, and now build for the web with HTML, CSS, JavaScript and React. Away from the screen, I draw.",
-    github: "https://github.com/", // add your profile link
+    github: "https://github.com/pushpendu-bit", 
     linkedin: "https://www.linkedin.com/in/Pushpendu-ghosh83",
     email: "ghoshn2026@gmail.com"
 };
@@ -43,7 +43,7 @@ const SKILLS = [
 const TIMELINE = [
     ["B.Tech, CSE (Data Science)", DATA.college, "Completed first year with an overall CGPA of " + DATA.cgpa + "."],
     ["Hackathon", "First year", "Took part in a hackathon at college."],
-    ["Higher Secondary (12th), Science", "Bandipur High School", "Scored 88%."],
+    ["Higher Secondary (12th), Science", "Bandipur High School", "Scored 86%."],
     ["Secondary (10th)", "Bandipur High School", "Scored 76%."]
 ];
 
@@ -84,7 +84,7 @@ function About() {
             h("div", { className: "card" }, h("p", null, DATA.about)),
             h("div", { className: "stats" },
                 h("div", { className: "card stat" }, h("b", null, DATA.cgpa), h("span", null, "CGPA after first year")),
-                h("div", { className: "card stat" }, h("b", null, "88%"), h("span", null, "12th grade, Science"))))));
+                h("div", { className: "card stat" }, h("b", null, "86%"), h("span", null, "12th grade, Science"))))));
 }
 
 function SkillCard({ s }) {
